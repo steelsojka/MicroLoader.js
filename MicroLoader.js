@@ -12,7 +12,7 @@
   
   var cache;
   var isCacheSet = false;
-  var MircoLoader = {};
+  var MicroLoader = {};
   var config = {
     THRESHOLD        : 100,
     CLASS            : "lazy",
@@ -22,7 +22,7 @@
   };
 
   var removeListener = function(event) {
-    window.removeEventListener(event, MircoLoader.load);
+    window.removeEventListener(event, MicroLoader.load);
   };
 
   var setCache = function() {
@@ -43,7 +43,7 @@
     element.className = element.className.replace(_class, "").trim();
   };
 
-  MircoLoader.set = function(setting, value) {
+  MicroLoader.set = function(setting, value) {
     var _setting = setting.toUpperCase();
     if (_setting in config) {
       return config[_setting] = value;
@@ -51,7 +51,7 @@
     return false;
   };
 
-  MircoLoader.get = function(setting) {
+  MicroLoader.get = function(setting) {
     var _setting = setting.toUpperCase();
     if (_setting in config) {
       return config[_setting];
@@ -59,13 +59,13 @@
     return false;
   };
 
-  MircoLoader.getConfig    = function() { return config; };
-  MircoLoader.getCache     = function() { return cache; };
-  MircoLoader.resetCache   = function() { isCacheSet = false; };
-  MircoLoader.removeOnload = function() { removeListener('DOMContentLoaded'); };
-  MircoLoader.removeScroll = function() { removeListener('scroll'); };
+  MicroLoader.getConfig    = function() { return config; };
+  MicroLoader.getCache     = function() { return cache; };
+  MicroLoader.resetCache   = function() { isCacheSet = false; };
+  MicroLoader.removeOnload = function() { removeListener('DOMContentLoaded'); };
+  MicroLoader.removeScroll = function() { removeListener('scroll'); };
 
-  MircoLoader.load = function() {
+  MicroLoader.load = function() {
     if (!isCacheSet) {
       cache = setCache();
     }
@@ -97,13 +97,13 @@
   };
   
   if (config.ONLOAD) {
-    window.addEventListener('DOMContentLoaded', MircoLoader.load);
+    window.addEventListener('DOMContentLoaded', MicroLoader.load);
   }
 
   if (config.ONSCROLL) {
-    window.addEventListener('scroll', MircoLoader.load); 
+    window.addEventListener('scroll', MicroLoader.load); 
   }
 
-  exports.MircoLoader = MircoLoader;
+  exports.MicroLoader = MicroLoader;
 
 }(this, window, document));
