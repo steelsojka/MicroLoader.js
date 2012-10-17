@@ -87,8 +87,8 @@
         cache.splice(i, 1);
        
         if (cache.length <= 0) {
-          this.removeOnload();
-          this.removeScroll();
+          MicroLoader.removeOnload();
+          MicroLoader.removeScroll();
         }
         continue;
       }
