@@ -14,11 +14,12 @@
   var isCacheSet = false;
   var MicroLoader = {};
   var config = {
-    THRESHOLD        : 100,
-    CLASS            : "lazy",
-    SOURCE_ATTRIBUTE : "data-src",
-    ONLOAD           : true,
-    ONSCROLL         : true
+    THRESHOLD                    : 100,
+    CLASS                        : "lazy",
+    SOURCE_ATTRIBUTE             : "data-src",
+    ONLOAD                       : true,
+    ONSCROLL                     : true,
+    REMOVE_SCROLL_ON_CACHE_EMPTY : false
   };
 
   var removeListener = function(event) {
@@ -64,6 +65,7 @@
   MicroLoader.resetCache   = function() { isCacheSet = false; };
   MicroLoader.removeOnload = function() { removeListener('DOMContentLoaded'); };
   MicroLoader.removeScroll = function() { removeListener('scroll'); };
+  MicroLoader.bindScroll   = function() { window.addEventListener('scroll', MicroLoader.load); };
 
   MicroLoader.load = function() {
     if (!isCacheSet) {
@@ -88,7 +90,9 @@
        
         if (cache.length <= 0) {
           MicroLoader.removeOnload();
-          MicroLoader.removeScroll();
+          if (config.REMOVE_SCROLL_ON_CACHE_EMPTY) {
+            MicroLoader.removeScroll();
+          }
         }
         continue;
       }
@@ -101,7 +105,7 @@
   }
 
   if (config.ONSCROLL) {
-    window.addEventListener('scroll', MicroLoader.load); 
+     MicroLoader.bindScroll();
   }
 
   exports.MicroLoader = MicroLoader;
