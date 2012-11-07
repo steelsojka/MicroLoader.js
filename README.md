@@ -1,7 +1,7 @@
 MicroLoader.js
 ==============
 
-Very small lazy image loader that is very configurable and lightweight (only 571 bytes gzipped!)
+Very small lazy image loader that is very configurable and lightweight (only 626 bytes gzipped!)
 
 How To
 ------
